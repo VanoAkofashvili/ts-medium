@@ -1,23 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface User {
-  email: string;
-  username: string;
-  bio: string;
-  image: string;
-  token: string;
+  username?: string;
+  token: string | null;
+  isAdmin?: boolean;
 }
 
 interface AuthState {
-  inProgress: boolean;
-  errors: object | null;
-  currentUser: User | null;
+  loading: boolean;
+  currentUser: User;
+  error: string | null;
 }
 
 const initialState: AuthState = {
-  inProgress: false,
-  errors: null,
-  currentUser: null,
+  loading: false,
+  error: null,
+  currentUser: {
+    token: null,
+  },
 };
 
 const authSlice = createSlice({
@@ -25,31 +25,23 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     // actions => action handlers
-    login: (state, action) => {
-      state.inProgress = false;
-      state.errors = action.payload.errors || null;
+    loggedIn: (state, action) => {
+      state.loading = false;
+      state.currentUser = action.payload;
+      state.error = null;
     },
-    createUser: (state) => {
-      state.currentUser = {
-        email: 'vanikoakofa@gmail.com',
-        bio: 'no bio',
-        image: 'no image',
-        token: RandomString(),
-        username: 'vano.akofa11',
-      };
+    registered: (state, action) => {
+      state.loading = false;
+      state.currentUser = action.payload;
+      state.error = null;
     },
   },
 });
 
-const RandomString = () => {
-  return Math.random().toString(36).substr(2, 10);
-};
-
 // Action creators
-export const { login, createUser } = authSlice.actions;
+export const { loggedIn, registered } = authSlice.actions;
 
 // Selectors
-export const getCurrentUser = (state: AuthState) => state.currentUser;
 
 // Reducer
 export default authSlice.reducer;

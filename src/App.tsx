@@ -1,7 +1,7 @@
-import React from 'react';
+import { Register } from './components';
 
 const App: React.FC = () => {
-  return <div>App Component</div>;
+  return <Register />;
 };
 
 export default App;
