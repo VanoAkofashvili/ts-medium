@@ -1,7 +1,12 @@
-import React from 'react';
+import { Container } from '@chakra-ui/react';
+import { Navbar } from './components';
 
 const App: React.FC = () => {
-  return <div>App Component</div>;
+  return (
+    <Container maxW="container.xl" p={0}>
+      <Navbar />
+    </Container>
+  );
 };
 
 export default App;
