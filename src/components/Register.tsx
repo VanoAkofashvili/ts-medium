@@ -1,31 +1,48 @@
-import { Container } from '@chakra-ui/layout';
-import { Button } from './Button';
+import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
+import { Container } from '@chakra-ui/layout';
+
+import { Button } from './Button';
 import { TextControl } from './Atoms';
 import { capitalize } from '../utils';
-import * as Yup from 'yup';
+import { InputTypes } from '../types';
 
-interface FormValues {
+// Form fields
+interface InputFields {
   username: string;
   email: string;
   password: string;
 }
 
-const Register: React.FC = () => {
-  const initialValues: FormValues = {
-    email: '',
-    username: '',
-    password: '',
-  };
+// Form field types
+type FormInputTypes = {
+  readonly [key in keyof InputFields]: InputTypes;
+};
 
-  const handleSubmit = <T extends FormValues>(values: T) => {
-    alert(JSON.stringify(values, null, 2));
+// For form generation
+interface Values {
+  initialValues: InputFields;
+  types: FormInputTypes;
+}
+
+const Register: React.FC = () => {
+  const formValues: Values = {
+    initialValues: {
+      email: '',
+      username: '',
+      password: '',
+    },
+    types: {
+      email: 'email',
+      password: 'password',
+      username: 'text',
+    },
   };
 
   return (
     <Container p={5}>
       <Formik
-        initialValues={initialValues}
+        initialValues={formValues.initialValues}
         validationSchema={Yup.object({
           email: Yup.string()
             .email('Invalid email address')
@@ -37,14 +54,29 @@ const Register: React.FC = () => {
             .max(15, 'Must be 15 characters or less')
             .required('Required'),
         })}
-        onSubmit={handleSubmit}
+        onSubmit={(values, formikHelpers) => {
+          alert(JSON.stringify(values, null, 2));
+          formikHelpers.setSubmitting(false);
+        }}
       >
-        <Form>
-          {Object.keys(initialValues).map((input) => (
-            <TextControl key={input} label={capitalize(input)} name={input} />
-          ))}
-          <Button type="submit">Sign Up</Button>
-        </Form>
+        {({ isSubmitting }) => (
+          <Form>
+            {Object.keys(formValues.initialValues).map((input) => {
+              return (
+                <TextControl
+                  key={input}
+                  label={capitalize(input)}
+                  name={input}
+                  // @ts-ignore
+                  type={formValues.types[input]}
+                />
+              );
+            })}
+            <Button type="submit" isLoading={isSubmitting}>
+              Sign Up
+            </Button>
+          </Form>
+        )}
       </Formik>
     </Container>
   );
