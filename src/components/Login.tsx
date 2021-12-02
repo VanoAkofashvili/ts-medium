@@ -1,15 +1,20 @@
 import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
+import { Formik, Form, ErrorMessage } from 'formik';
 import { TextControl, Button } from './Atoms';
 import { capitalize } from '../utils';
 import { FormFields } from '../types';
-
-interface LoginFormFields {
+import { useLoginMutation } from '../services/auth.service';
+export interface LoginFormFields {
   email: string;
   password: string;
 }
 
 const Login: React.FC = () => {
+  const [login, data] = useLoginMutation();
+  console.log(
+    '%c Rendering...',
+    'background: red; color: white; font-size: 15px'
+  );
   const formValues: FormFields<LoginFormFields> = {
     initialValues: {
       email: '',
@@ -32,7 +37,8 @@ const Login: React.FC = () => {
       initialValues={formValues.initialValues}
       validationSchema={loginValidationSchema}
       onSubmit={async (values) => {
-        console.log(values);
+        await login(values);
+        console.log(data);
       }}
     >
       {({ isSubmitting }) => (
@@ -50,6 +56,7 @@ const Login: React.FC = () => {
           <Button type="submit" isLoading={isSubmitting}>
             Login
           </Button>
+          {data.isError && <pre>{JSON.stringify(data.error, null, 2)}</pre>}
         </Form>
       )}
     </Formik>
