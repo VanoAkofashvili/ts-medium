@@ -7,8 +7,17 @@ interface User {
   isAdmin: boolean;
   token: string;
 }
-export const authApi = createApi({
-  reducerPath: 'authApi',
+
+interface Post {
+  likes: string[];
+  _id: string;
+  userId: string;
+  desc: string;
+  img: string;
+}
+
+export const apiSlice = createApi({
+  reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BASE_URL,
   }),
@@ -26,7 +35,14 @@ export const authApi = createApi({
         return response.data;
       },
     }),
+    getPostsAll: builder.query<Post[], void>({
+      query: () => '/posts',
+    }),
+    getPost: builder.query<Post, string>({
+      query: (postId) => `/posts/${postId}`,
+    }),
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useGetPostsAllQuery, useGetPostQuery } =
+  apiSlice;

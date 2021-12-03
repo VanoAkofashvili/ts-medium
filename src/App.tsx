@@ -8,6 +8,7 @@ const App: React.FC = () => {
       <Navbar />
       <Routes>
         <Route path="/">
+          <Route index element={<div>main page</div>} />
           <Route path="auth" element={<AuthLayout />}>
             <Route index element={<Login />} />
             <Route path="register" element={<Register />} />

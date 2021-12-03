@@ -1,20 +1,17 @@
 import * as Yup from 'yup';
-import { Formik, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import { TextControl, Button } from './Atoms';
 import { capitalize } from '../utils';
 import { FormFields } from '../types';
-import { useLoginMutation } from '../services/auth.service';
+import { useGetPostQuery, useGetPostsAllQuery } from '../services/api.service';
 export interface LoginFormFields {
   email: string;
   password: string;
 }
 
 const Login: React.FC = () => {
-  const [login, data] = useLoginMutation();
-  console.log(
-    '%c Rendering...',
-    'background: red; color: white; font-size: 15px'
-  );
+  const responseResult = useGetPostQuery('61a9d182256c1e45cb95036e');
+  console.log(responseResult);
   const formValues: FormFields<LoginFormFields> = {
     initialValues: {
       email: '',
@@ -31,15 +28,16 @@ const Login: React.FC = () => {
       email: Yup.string().email('Invalid email address').required('Required'),
       password: Yup.string().required('Required'),
     });
-  console.log(formValues.types['email']);
+
+  const handleSubmit = async (values: LoginFormFields) => {
+    // await login(values);
+    console.log(values);
+  };
   return (
     <Formik
       initialValues={formValues.initialValues}
       validationSchema={loginValidationSchema}
-      onSubmit={async (values) => {
-        await login(values);
-        console.log(data);
-      }}
+      onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -56,7 +54,7 @@ const Login: React.FC = () => {
           <Button type="submit" isLoading={isSubmitting}>
             Login
           </Button>
-          {data.isError && <pre>{JSON.stringify(data.error, null, 2)}</pre>}
+          {/* {data.isError && <pre>{JSON.stringify(data.error, null, 2)}</pre>} */}
         </Form>
       )}
     </Formik>
