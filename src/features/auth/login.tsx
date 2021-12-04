@@ -1,19 +1,21 @@
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { TextControl, Button } from '../../common/components';
-import { capitalize, randomString } from '../../common/utils';
+import { capitalize } from '../../common/utils';
 import { FormFields } from '../../app/types';
-
-import { useGetPostQuery, useAddNewPostMutation, Post } from '../api';
-
+import { useLoginMutation } from '../api';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '@chakra-ui/react';
 export interface LoginFormFields {
   email: string;
   password: string;
 }
 
 const Login: React.FC = () => {
-  const responseResult = useGetPostQuery('61a9d182256c1e45cb95036e');
-  const [addNewPost, { isLoading }] = useAddNewPostMutation();
+  const toast = useToast();
+  const [login, { isLoading }] = useLoginMutation();
+  const navigate = useNavigate();
+
   const formValues: FormFields<LoginFormFields> = {
     initialValues: {
       email: '',
@@ -32,8 +34,27 @@ const Login: React.FC = () => {
     });
 
   const handleSubmit = async (values: LoginFormFields) => {
-    // await login(values);
-    console.log(values);
+    try {
+      await login(values).unwrap();
+      toast({
+        status: 'success',
+        title: 'Logged in',
+        position: 'top-right',
+        isClosable: true,
+      });
+      navigate('/', { replace: true });
+    } catch (err) {
+      console.log(err);
+
+      toast({
+        status: 'error',
+        position: 'top-right',
+        title: 'Error',
+        // @ts-ignore
+        description: (err as Error).data.error,
+        isClosable: true,
+      });
+    }
   };
   return (
     <>
@@ -54,29 +75,13 @@ const Login: React.FC = () => {
                 />
               );
             })}
-            <Button type="submit" isLoading={isSubmitting}>
+            <Button type="submit" isLoading={isLoading} isFullWidth>
               Login
             </Button>
             {/* {data.isError && <pre>{JSON.stringify(data.error, null, 2)}</pre>} */}
           </Form>
         )}
       </Formik>
-      <Button
-        mt={5}
-        onClick={async () => {
-          const fakePost: Post = {
-            desc: 'fake descripition',
-            img: 'https://example.com/image.jpg',
-            likes: [],
-            userId: randomString(),
-            _id: randomString(),
-          };
-          const response = await addNewPost(fakePost);
-          console.log('response: ', response);
-        }}
-      >
-        Add new Post
-      </Button>
     </>
   );
 };

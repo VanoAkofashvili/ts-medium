@@ -1,11 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { LoginFormFields } from '../auth';
 
-interface User {
+export interface User {
   username: string;
   email: string;
   isAdmin: boolean;
   token: string;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
 }
 
 export interface Post {
@@ -22,18 +27,12 @@ export const apiSlice = createApi({
     baseUrl: process.env.REACT_APP_BASE_URL,
   }),
   endpoints: (builder) => ({
-    login: builder.mutation<User, LoginFormFields>({
-      query: (data) => {
-        return {
-          url: '/auth/login',
-          body: data,
-          method: 'POST',
-        };
-      },
-      transformResponse: (response: { data: User }) => {
-        console.log('Transform response: ', response);
-        return response.data;
-      },
+    login: builder.mutation<User, LoginRequest>({
+      query: (credintials) => ({
+        url: 'auth/login',
+        method: 'POST',
+        body: credintials,
+      }),
     }),
     getPostsAll: builder.query<Post[], void>({
       query: () => '/posts',

@@ -1,3 +1,4 @@
-export * from './Login';
-export * from './Register';
-export * from './AuthLayout';
+export * from './login';
+export * from './register';
+export * from './auth-layout';
+export { default as authReducer } from './auth-slice';
