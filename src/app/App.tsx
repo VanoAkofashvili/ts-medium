@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Container } from '@chakra-ui/react';
 import { Login, Register, AuthLayout } from '../features/auth';
 import { Navbar } from './components';
+import { PrivateRoute } from '../common';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,14 @@ const App: React.FC = () => {
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
           </Route>
+          <Route
+            path="/settings"
+            element={
+              <PrivateRoute>
+                <main>User profile</main>
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<main>SOmething wen wrong</main>} />
         </Route>
       </Routes>
