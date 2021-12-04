@@ -20,7 +20,10 @@ const Navbar = () => {
           <Button mr={4}>Sign In</Button>
         </Link>
         <Link to="/auth/register">
-          <Button>Sign Up</Button>
+          <Button mr={4}>Sign Up</Button>
+        </Link>
+        <Link to="/settings">
+          <Button>Settings</Button>
         </Link>
       </Box>
     </Flex>
