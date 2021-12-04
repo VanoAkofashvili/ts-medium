@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { LoginFormFields } from '../components';
+import { LoginFormFields } from '../auth';
 
 interface User {
   username: string;
@@ -8,9 +8,9 @@ interface User {
   token: string;
 }
 
-interface Post {
+export interface Post {
   likes: string[];
-  _id: string;
+  _id?: string;
   userId: string;
   desc: string;
   img: string;
@@ -41,8 +41,19 @@ export const apiSlice = createApi({
     getPost: builder.query<Post, string>({
       query: (postId) => `/posts/${postId}`,
     }),
+    addNewPost: builder.mutation<Post, Post>({
+      query: (post) => ({
+        url: '/posts',
+        method: 'POST',
+        body: post,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useGetPostsAllQuery, useGetPostQuery } =
-  apiSlice;
+export const {
+  useLoginMutation,
+  useGetPostsAllQuery,
+  useGetPostQuery,
+  useAddNewPostMutation,
+} = apiSlice;

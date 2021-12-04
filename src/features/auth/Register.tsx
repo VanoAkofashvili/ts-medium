@@ -1,9 +1,8 @@
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
-import { Button } from './Atoms/Button';
-import { TextControl } from './Atoms';
-import { capitalize } from '../utils';
-import { FormFields } from '../types';
+import { Button, TextControl } from '../../common/components';
+import { capitalize } from '../../common/utils';
+import { FormFields } from '../../app/types';
 
 interface RegisterFormFields {
   username: string;

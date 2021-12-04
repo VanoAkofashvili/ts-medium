@@ -1,7 +1,9 @@
-import { Container } from '@chakra-ui/react';
-import { Navbar, Register, Login } from './components';
 import { Routes, Route } from 'react-router-dom';
-import { AuthLayout } from './components/AuthLayout';
+
+import { Container } from '@chakra-ui/react';
+import { Login, Register, AuthLayout } from '../features/auth';
+import { Navbar } from './components';
+
 const App: React.FC = () => {
   return (
     <Container maxW="container.xl" p={0}>

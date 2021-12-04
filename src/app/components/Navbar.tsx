@@ -1,7 +1,6 @@
 import { Flex, Spacer, Box } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { Button } from './Atoms/Button';
-import { Logo } from './Logo';
+import { Button, Logo } from '../../common/components';
 
 const Navbar = () => {
   return (
