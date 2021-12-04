@@ -18,7 +18,7 @@ const App: React.FC = () => {
             <Route path="login" element={<Login />} />
           </Route>
           <Route
-            path="/settings"
+            path="settings"
             element={
               <PrivateRoute>
                 <main>User profile</main>
