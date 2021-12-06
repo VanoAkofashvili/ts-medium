@@ -50,8 +50,7 @@ const Login: React.FC = () => {
         status: 'error',
         position: 'top-right',
         title: 'Error',
-        // @ts-ignore
-        description: (err as Error).data.error,
+        description: 'Something went wrong',
         isClosable: true,
       });
     }

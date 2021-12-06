@@ -4,14 +4,12 @@ import { RootState } from '../../app/store';
 
 interface AuthState {
   user: User | null;
-  isAuthenticated: boolean;
   token: string | null;
 }
 
 const initialState: AuthState = {
   user: null,
   token: null,
-  isAuthenticated: false,
 };
 
 const authSlice = createSlice({
@@ -24,7 +22,6 @@ const authSlice = createSlice({
       (state, { payload }) => {
         state.token = payload.token;
         state.user = payload;
-        state.isAuthenticated = true;
       }
     );
   },
