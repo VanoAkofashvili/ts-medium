@@ -27,6 +27,15 @@ export const apiSlice = createApi({
     baseUrl: process.env.REACT_APP_BASE_URL,
   }),
   endpoints: (builder) => ({
+    getCurrentUser: builder.query<User, string>({
+      query: (token) => ({
+        url: 'auth/currentuser',
+        method: 'GET',
+        headers: {
+          'x-access-token': token,
+        },
+      }),
+    }),
     login: builder.mutation<User, LoginRequest>({
       query: (credintials) => ({
         url: 'auth/login',
@@ -55,4 +64,5 @@ export const {
   useGetPostsAllQuery,
   useGetPostQuery,
   useAddNewPostMutation,
+  useGetCurrentUserQuery,
 } = apiSlice;

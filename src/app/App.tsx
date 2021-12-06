@@ -1,11 +1,18 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-
 import { Container } from '@chakra-ui/react';
 import { Login, Register, AuthLayout } from '../features/auth';
 import { Navbar } from './components';
-import { PrivateRoute } from '../common';
+import { PrivateRoute, useAppSelector } from '../common';
+import { useGetCurrentUserQuery } from '../features/api';
 
 const App: React.FC = () => {
+  const token = localStorage.getItem('access_token');
+
+  const { data: user } = useGetCurrentUserQuery(token as string);
+  console.log('user: ', user);
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+
   return (
     <Container maxW="container.xl" p={0}>
       <Navbar />
