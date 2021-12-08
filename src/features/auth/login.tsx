@@ -60,6 +60,7 @@ const Login: React.FC = () => {
   return (
     <Box
       flexGrow="1"
+      p={{ base: 2, sm: 4 }}
       d="flex"
       flexDirection={{ base: 'column', md: 'row' }}
       justifyContent={{ md: 'space-between' }}
