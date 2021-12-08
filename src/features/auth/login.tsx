@@ -5,8 +5,8 @@ import { LoginHeader } from './login-header';
 import { capitalize } from '../../common/utils';
 import { FormFields } from '../../app/types';
 import { useLoginMutation } from '../api';
-import { useNavigate } from 'react-router-dom';
-import { useToast, Container, Box } from '@chakra-ui/react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useToast, Container, Box, Text, Divider } from '@chakra-ui/react';
 
 export interface LoginFormFields {
   email: string;
@@ -66,7 +66,7 @@ const Login: React.FC = () => {
       alignItems="center"
     >
       <LoginHeader />
-      <Container m={0} maxWidth="400px" variant="card">
+      <Container m={0} maxWidth="400px" variant="card" textAlign="center">
         <Formik
           initialValues={formValues.initialValues}
           validationSchema={loginValidationSchema}
@@ -90,6 +90,21 @@ const Login: React.FC = () => {
             </Form>
           )}
         </Formik>
+        <Link to="/login">
+          <Text mt={4} color="facebook.blue" fontWeight="light">
+            Forgot password?
+          </Text>
+        </Link>
+        <Divider />
+        <Button
+          variant="solid"
+          colorMode="secondary"
+          size="lg"
+          fontSize="16px"
+          isFullWidth={false}
+        >
+          Create new account
+        </Button>
       </Container>
     </Box>
   );

@@ -13,6 +13,7 @@ const breakpoints = createBreakpoints({
 const Button = {
   baseStyle: {
     fontSize: 'xl',
+    letterSpacing: '1.3px',
     padding: '0 16px',
     lineHeight: '48px',
     height: '48px',
@@ -46,6 +47,13 @@ const Container = {
   },
 };
 
+const Divider = {
+  baseStyle: {
+    color: '#dadde1',
+    margin: '20px 0',
+  },
+};
+
 const theme = extendTheme({
   colors: {
     facebook: {
@@ -63,6 +71,7 @@ const theme = extendTheme({
   components: {
     Button,
     Container,
+    Divider,
   },
   styles: {
     global: {

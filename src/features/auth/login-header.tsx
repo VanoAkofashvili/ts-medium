@@ -11,7 +11,7 @@ export const LoginHeader: React.FC = () => {
       flexDirection="column"
       alignItems="center"
     >
-      <Logo htmlWidth="200px" />
+      <Logo htmlWidth="300px" />
       <Heading as="h2" fontSize="24px" fontWeight="300">
         Connect with friends and the world around you on Facebook.
       </Heading>
