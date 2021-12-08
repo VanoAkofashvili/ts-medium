@@ -1,4 +1,2 @@
-export * from './atomic/TextControl';
-export * from './atomic/Button';
-export * from './atomic/Logo';
+export * from './atomic';
 export * from './private-route';
