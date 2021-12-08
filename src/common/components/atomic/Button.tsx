@@ -1,8 +1,15 @@
 import { Button as Btn, ButtonProps } from '@chakra-ui/react';
 
-const Button: React.FC<ButtonProps> = ({ children, ...btnProps }) => {
+export interface ButtonColorMode {
+  colorMode: 'primary' | 'secondary';
+}
+
+const Button: React.FC<ButtonProps & Partial<ButtonColorMode>> = ({
+  children,
+  ...buttonProps
+}) => {
   return (
-    <Btn colorScheme="facebook" {...btnProps}>
+    <Btn isFullWidth {...buttonProps}>
       {children}
     </Btn>
   );

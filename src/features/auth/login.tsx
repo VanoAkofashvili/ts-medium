@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
-import { TextControl, Button } from '../../common/components';
+import { TextControl, Logo, Button } from '../../common/components';
 import { capitalize } from '../../common/utils';
 import { FormFields } from '../../app/types';
 import { useLoginMutation } from '../api';
@@ -57,6 +57,7 @@ const Login: React.FC = () => {
   };
   return (
     <>
+      <Logo htmlHeight="100px" htmlWidth="300px" m={0} />
       <Formik
         initialValues={formValues.initialValues}
         validationSchema={loginValidationSchema}
@@ -74,8 +75,8 @@ const Login: React.FC = () => {
                 />
               );
             })}
-            <Button type="submit" isLoading={isLoading} isFullWidth>
-              Login
+            <Button type="submit" isLoading={isLoading} size="xl">
+              Log In
             </Button>
             {/* {data.isError && <pre>{JSON.stringify(data.error, null, 2)}</pre>} */}
           </Form>
