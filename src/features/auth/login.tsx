@@ -1,11 +1,13 @@
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
-import { TextControl, Logo, Button } from '../../common/components';
+import { TextControl, Button } from '../../common/components';
+import { LoginHeader } from './login-header';
 import { capitalize } from '../../common/utils';
 import { FormFields } from '../../app/types';
 import { useLoginMutation } from '../api';
 import { useNavigate } from 'react-router-dom';
-import { useToast } from '@chakra-ui/react';
+import { useToast, Container, Box } from '@chakra-ui/react';
+
 export interface LoginFormFields {
   email: string;
   password: string;
@@ -56,33 +58,40 @@ const Login: React.FC = () => {
     }
   };
   return (
-    <>
-      <Logo htmlHeight="100px" htmlWidth="300px" m={0} />
-      <Formik
-        initialValues={formValues.initialValues}
-        validationSchema={loginValidationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            {Object.keys(formValues.initialValues).map((input) => {
-              return (
-                <TextControl
-                  key={input}
-                  label={capitalize(input)}
-                  name={input}
-                  type={formValues.types[input as keyof LoginFormFields]}
-                />
-              );
-            })}
-            <Button type="submit" isLoading={isLoading} size="xl">
-              Log In
-            </Button>
-            {/* {data.isError && <pre>{JSON.stringify(data.error, null, 2)}</pre>} */}
-          </Form>
-        )}
-      </Formik>
-    </>
+    <Box
+      flexGrow="1"
+      d="flex"
+      flexDirection={{ base: 'column', md: 'row' }}
+      justifyContent={{ md: 'space-between' }}
+      alignItems="center"
+    >
+      <LoginHeader />
+      <Container m={0} maxWidth="400px" variant="card">
+        <Formik
+          initialValues={formValues.initialValues}
+          validationSchema={loginValidationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              {Object.keys(formValues.initialValues).map((input) => {
+                return (
+                  <TextControl
+                    key={input}
+                    label={capitalize(input)}
+                    name={input}
+                    type={formValues.types[input as keyof LoginFormFields]}
+                  />
+                );
+              })}
+              <Button type="submit" isLoading={isLoading} size="xl">
+                Log In
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </Container>
+    </Box>
   );
 };
 

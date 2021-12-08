@@ -1,5 +1,14 @@
 import { extendTheme, theme as base } from '@chakra-ui/react';
+import { createBreakpoints } from '@chakra-ui/theme-tools';
 import { ButtonColorMode } from '../../common/components/atomic/Button';
+
+const breakpoints = createBreakpoints({
+  sm: '30em',
+  md: '56em', // about 900px
+  lg: '62em',
+  xl: '80em',
+  '2xl': '96em',
+});
 
 const Button = {
   baseStyle: {
@@ -62,6 +71,10 @@ const theme = extendTheme({
       },
     },
   },
+  sizes: {
+    ...base.space,
+  },
+  breakpoints,
 });
 
 export default theme;
