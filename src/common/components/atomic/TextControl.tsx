@@ -10,6 +10,7 @@ import {
 interface TextControlProps {
   label: string;
   name: string;
+  withLabel?: boolean;
 }
 
 export type FixMeLater = any;
@@ -21,13 +22,18 @@ export type FixMeLater = any;
  */
 export const TextControl: React.FC<TextControlProps & InputProps> = ({
   label,
+  withLabel = false,
   ...props
 }) => {
   const [field, meta] = useField(props as FixMeLater);
   return (
     <FormControl id={label} isInvalid={!!(meta.touched && meta.error)} mb={5}>
-      <FormLabel htmlFor={label}>{label}</FormLabel>
-      <Input {...field} {...props} />
+      {withLabel && <FormLabel htmlFor={label}>{label}</FormLabel>}
+      <Input
+        {...field}
+        {...props}
+        {...(withLabel ? {} : { placeholder: label })}
+      />
       <FormErrorMessage>{meta.error}</FormErrorMessage>
     </FormControl>
   );

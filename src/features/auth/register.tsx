@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
-import { Button, TextControl } from '../../common/components';
+import { TextControl } from '../../common/components';
+import { Button } from '@chakra-ui/button';
 import { capitalize } from '../../common/utils';
 import { FormFields } from '../../app/types';
 

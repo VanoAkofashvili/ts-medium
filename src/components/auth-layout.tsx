@@ -3,7 +3,7 @@ import { Outlet } from 'react-router';
 
 const AuthLayout: React.FC = () => {
   return (
-    <Container p={5}>
+    <Container maxW="container.sm">
       <Outlet />
     </Container>
   );
