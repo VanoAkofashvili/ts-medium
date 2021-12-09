@@ -1,6 +1,6 @@
 import { ComponentType } from 'react';
 import { Navigate } from 'react-router-dom';
-import { RoutePaths } from '../../app/routes';
+import { RoutePaths } from '../../app/constants';
 import { useAuth } from '../hooks';
 
 // Don't render component when user is logged in (login, register page)
