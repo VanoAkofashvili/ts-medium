@@ -24,7 +24,7 @@ export interface Post {
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BASE_URL,
+    baseUrl: 'http://localhost:8800/api',
   }),
   endpoints: (builder) => ({
     getCurrentUser: builder.query<User, string>({

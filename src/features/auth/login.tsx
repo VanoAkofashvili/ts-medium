@@ -8,12 +8,13 @@ import { useLoginMutation } from '../api';
 import { Link, useNavigate } from 'react-router-dom';
 import { useToast, Container, Box, Text, Divider } from '@chakra-ui/react';
 import { Button } from '@chakra-ui/button';
+import { withNoAuth } from '../../common/hocs';
 export interface LoginFormFields {
   email: string;
   password: string;
 }
 
-const Login: React.FC = () => {
+const Login: React.FC = withNoAuth(() => {
   const toast = useToast();
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
@@ -108,6 +109,6 @@ const Login: React.FC = () => {
       </Container>
     </Box>
   );
-};
+});
 
 export { Login };
