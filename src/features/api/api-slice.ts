@@ -26,6 +26,7 @@ export const apiSlice = createApi({
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = (getState() as RootState).auth.token;
+      console.log({ token2: token });
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -41,14 +42,12 @@ export const apiSlice = createApi({
         body: credintials,
       }),
     }),
-    getCurrentUser: builder.query<User, string>({
-      query: (token) => ({
-        url: 'auth/currentuser',
-        method: 'GET',
-        headers: {
-          authorization: token,
-        },
-      }),
+    getCurrentUser: builder.mutation<User, void>({
+      query: () => ({ url: 'auth/currentuser', method: 'GET' }),
+      // transformResponse: (response: { user: User }) => {
+      //   console.log(`response`, response);
+      //   return response.user;
+      // },
     }),
     getPostsAll: builder.query<Post[], void>({
       query: () => '/posts',
@@ -71,5 +70,5 @@ export const {
   useGetPostsAllQuery,
   useGetPostQuery,
   useAddNewPostMutation,
-  useGetCurrentUserQuery,
+  useGetCurrentUserMutation,
 } = apiSlice;
