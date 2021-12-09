@@ -1,2 +1,2 @@
-export * from './atomic';
-export * from './private-route';
+export * from './logo';
+export * from './text-control';

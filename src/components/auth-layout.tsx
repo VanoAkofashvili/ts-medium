@@ -4,7 +4,7 @@ import { Outlet } from 'react-router';
 const AuthLayout: React.FC = () => {
   return (
     <Box
-      maxW="container.lg"
+      maxW="container.xl"
       m="auto"
       h="100vh"
       d="flex"

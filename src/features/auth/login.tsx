@@ -1,13 +1,13 @@
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
-import { TextControl, Button } from '../../common/components';
+import { TextControl } from '../../common/components';
 import { LoginHeader } from './login-header';
 import { capitalize } from '../../common/utils';
 import { FormFields } from '../../app/types';
 import { useLoginMutation } from '../api';
 import { Link, useNavigate } from 'react-router-dom';
 import { useToast, Container, Box, Text, Divider } from '@chakra-ui/react';
-
+import { Button } from '@chakra-ui/button';
 export interface LoginFormFields {
   email: string;
   password: string;
@@ -85,7 +85,12 @@ const Login: React.FC = () => {
                   />
                 );
               })}
-              <Button type="submit" isLoading={isLoading} variant="primary">
+              <Button
+                type="submit"
+                isLoading={isLoading}
+                variant="primary"
+                isFullWidth
+              >
                 Log In
               </Button>
             </Form>

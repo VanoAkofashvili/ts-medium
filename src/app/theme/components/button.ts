@@ -26,5 +26,7 @@ export const ButtonStyles = {
       },
     }),
   },
-  defaultProps: {},
+  defaultProps: {
+    variant: 'primary',
+  },
 };
