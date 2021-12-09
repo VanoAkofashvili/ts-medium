@@ -20,7 +20,7 @@ if (localStorage.getItem('access_token')) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <ChakraProvider theme={theme}>
+    <ChakraProvider resetCSS theme={theme}>
       <BrowserRouter>
         <App />
       </BrowserRouter>

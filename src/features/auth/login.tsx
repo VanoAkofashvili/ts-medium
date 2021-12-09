@@ -85,7 +85,7 @@ const Login: React.FC = () => {
                   />
                 );
               })}
-              <Button type="submit" isLoading={isLoading} size="xl">
+              <Button type="submit" isLoading={isLoading} variant="primary">
                 Log In
               </Button>
             </Form>
@@ -97,13 +97,7 @@ const Login: React.FC = () => {
           </Text>
         </Link>
         <Divider />
-        <Button
-          variant="solid"
-          colorMode="secondary"
-          size="lg"
-          fontSize="16px"
-          isFullWidth={false}
-        >
+        <Button variant="secondary" fontSize="16px" isFullWidth={false}>
           Create new account
         </Button>
       </Container>
