@@ -1,6 +1,10 @@
 import { extendTheme, theme as base } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
-import { ButtonColorMode } from '../../common/components/atomic/Button';
+import {
+  ButtonStyles as Button,
+  ContainerStyles as Container,
+  DividerStyles as Divider,
+} from './components';
 
 const breakpoints = createBreakpoints({
   sm: '30em',
@@ -10,57 +14,13 @@ const breakpoints = createBreakpoints({
   '2xl': '96em',
 });
 
-const Button = {
-  baseStyle: {
-    fontSize: 'xl',
-    letterSpacing: '1.3px',
-    padding: '0 16px',
-    lineHeight: '48px',
-    height: '48px',
-    borderRadius: '6px',
-    color: 'facebook.white',
-  },
-
-  variants: {
-    solid: (props: ButtonColorMode) => ({
-      bg: props.colorMode === 'secondary' ? 'facebook.green' : 'facebook.blue',
-    }),
-  },
-  defaultProps: {
-    size: 'xl',
-    variant: 'solid',
-  },
-};
-
-const Container = {
-  baseStyle: {
-    bg: 'transparent',
-  },
-  variants: {
-    card: {
-      bg: 'facebook.white',
-      p: '20px',
-      border: 'none',
-      borderRadius: '8px',
-      boxShadow: '0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%)',
-    },
-  },
-};
-
-const Divider = {
-  baseStyle: {
-    color: '#dadde1',
-    margin: '20px 0',
-  },
-};
-
 const theme = extendTheme({
   colors: {
     facebook: {
       transparent: 'transparent',
       background: '#f0f2f5',
-      blue: '#1877f2',
-      green: '#42b72a',
+      primary: '#1877f2',
+      secondary: '#42b72a',
       white: '#fff',
       focus: '#1877f2',
     },
@@ -80,9 +40,7 @@ const theme = extendTheme({
       },
     },
   },
-  sizes: {
-    ...base.space,
-  },
+
   breakpoints,
 });
 

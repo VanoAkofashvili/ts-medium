@@ -1,11 +1,10 @@
 import { Box } from '@chakra-ui/react';
 import { Outlet } from 'react-router';
-import { Logo } from '../common';
 
 const AuthLayout: React.FC = () => {
   return (
     <Box
-      maxW="container.lg"
+      maxW="container.xl"
       m="auto"
       h="100vh"
       d="flex"
