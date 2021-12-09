@@ -5,13 +5,11 @@ import { RootState } from '../../app/store';
 interface AuthState {
   user: User | null;
   token: string | null;
-  isAuthenticated: boolean;
 }
 
 const initialState: AuthState = {
   user: null,
   token: null,
-  isAuthenticated: false,
 };
 
 const authSlice = createSlice({
@@ -19,8 +17,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loggedIn: (state) => {
-      console.log('shemovida');
-      state.isAuthenticated = true;
+      // console.log('shemovida');
+      // state.isAuthenticated = true;
     },
   },
   extraReducers: (builder) => {
@@ -28,15 +26,14 @@ const authSlice = createSlice({
       apiSlice.endpoints.login.matchFulfilled,
       (state, { payload }) => {
         state.token = payload.token;
-        state.user = payload;
-        localStorage.setItem('access_token', payload.token);
+        state.user = payload.user;
       }
     );
     builder.addMatcher(
       apiSlice.endpoints.getCurrentUser.matchFulfilled,
       (state, { payload }) => {
-        state.token = payload.token;
-        state.user = payload;
+        // state.token = payload.token;
+        // state.user = payload;
       }
     );
   },

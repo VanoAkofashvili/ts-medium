@@ -1,16 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { LoginFormFields } from '../auth';
+import { RootState } from '../../app/store';
 
 export interface User {
   username: string;
-  email: string;
-  isAdmin: boolean;
-  token: string;
 }
 
-export interface LoginRequest {
-  email: string;
-  password: string;
+export interface LoginResponse {
+  token: string;
+  user: User;
 }
 
 export interface Post {
@@ -25,22 +23,31 @@ export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8800/api',
+    prepareHeaders: (headers, { getState }) => {
+      // By default, if we have a token in the store, let's use that for authenticated requests
+      const token = (getState() as RootState).auth.token;
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
+    // Auth
+    login: builder.mutation<LoginResponse, LoginFormFields>({
+      query: (credintials) => ({
+        url: 'auth/login',
+        method: 'POST',
+        body: credintials,
+      }),
+    }),
     getCurrentUser: builder.query<User, string>({
       query: (token) => ({
         url: 'auth/currentuser',
         method: 'GET',
         headers: {
-          'x-access-token': token,
+          authorization: token,
         },
-      }),
-    }),
-    login: builder.mutation<User, LoginRequest>({
-      query: (credintials) => ({
-        url: 'auth/login',
-        method: 'POST',
-        body: credintials,
       }),
     }),
     getPostsAll: builder.query<Post[], void>({
