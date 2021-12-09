@@ -1,10 +1,16 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useAppSelector } from '../common';
 import { Layout } from '../components';
 import { PrivateRoute } from '../components/private-route';
-import { useGetPostsAllQuery } from '../features/api';
+import {
+  useGetCurrentUserMutation,
+  useGetPostsAllQuery,
+} from '../features/api';
 import { Login, Register } from '../features/auth';
 import { PostsList } from '../features/posts';
-import { RoutePaths as _ } from './routes';
+import { RoutePaths as _ } from './constants';
+
 const Main = () => {
   const { data: posts } = useGetPostsAllQuery();
   return (
@@ -14,6 +20,15 @@ const Main = () => {
   );
 };
 const App: React.FC = () => {
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const [login] = useGetCurrentUserMutation();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      login();
+    }
+  }, [isAuthenticated, login]);
+
   return (
     <Routes>
       <Route path={_.home} element={<Layout />}>
