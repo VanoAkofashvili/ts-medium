@@ -1,3 +1,5 @@
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, Container, Box, Text, Divider } from '@chakra-ui/react';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { TextControl } from '../../common/components';
@@ -5,16 +7,13 @@ import { LoginHeader } from './login-header';
 import { capitalize } from '../../common/utils';
 import { FormFields } from '../../app/types';
 import { useLoginMutation } from '../api';
-import { Link, useNavigate } from 'react-router-dom';
-import { useToast, Container, Box, Text, Divider } from '@chakra-ui/react';
-import { Button } from '@chakra-ui/button';
+import { withNoAuth } from '../../common/hocs';
 export interface LoginFormFields {
   email: string;
   password: string;
 }
 
-const Login: React.FC = () => {
-  const toast = useToast();
+const Login: React.FC = withNoAuth(() => {
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
 
@@ -38,25 +37,12 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: LoginFormFields) => {
     try {
       await login(values).unwrap();
-      toast({
-        status: 'success',
-        title: 'Logged in',
-        position: 'top-right',
-        isClosable: true,
-      });
       navigate('/', { replace: true });
     } catch (err) {
       console.log(err);
-
-      toast({
-        status: 'error',
-        position: 'top-right',
-        title: 'Error',
-        description: 'Something went wrong',
-        isClosable: true,
-      });
     }
   };
+
   return (
     <Box
       flexGrow="1"
@@ -108,6 +94,6 @@ const Login: React.FC = () => {
       </Container>
     </Box>
   );
-};
+});
 
 export { Login };
