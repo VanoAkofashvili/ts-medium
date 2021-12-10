@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useAppSelector } from '../common';
 import { Layout } from '../components';
@@ -24,6 +24,7 @@ const App: React.FC = () => {
   const [login] = useGetCurrentUserMutation();
 
   useEffect(() => {
+    console.log('useEffect');
     if (isAuthenticated) {
       login();
     }

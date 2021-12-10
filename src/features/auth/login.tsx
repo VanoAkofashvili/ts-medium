@@ -8,6 +8,7 @@ import { capitalize } from '../../common/utils';
 import { FormFields } from '../../app/types';
 import { useLoginMutation } from '../api';
 import { withNoAuth } from '../../common/hocs';
+
 export interface LoginFormFields {
   email: string;
   password: string;
@@ -83,7 +84,12 @@ const Login: React.FC = withNoAuth(() => {
           )}
         </Formik>
         <Link to="/login">
-          <Text mt={4} color="facebook.blue" fontWeight="light">
+          <Text
+            mt={4}
+            color="facebook.blue"
+            fontWeight="light"
+            textColor="facebook.primary"
+          >
             Forgot password?
           </Text>
         </Link>

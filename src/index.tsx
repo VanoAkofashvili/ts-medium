@@ -17,6 +17,8 @@ const rootElement = document.getElementById('root');
 
 // Check for token and update app state if required
 if (localStorage.getItem(ACCESS_TOKEN)) {
+  console.log('index.ts');
+  // Set token and isAuthenticated
   store.dispatch(loggedIn(localStorage.getItem(ACCESS_TOKEN)));
 }
 

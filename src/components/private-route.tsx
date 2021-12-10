@@ -6,6 +6,7 @@ interface PrivateRouteProps {
 }
 
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+  console.log('Private route');
   const { user } = useAuth();
   const location = useLocation();
 

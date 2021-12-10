@@ -35,8 +35,7 @@ const authSlice = createSlice({
     builder.addMatcher(
       apiSlice.endpoints.getCurrentUser.matchFulfilled,
       (state, { payload }) => {
-        console.log(payload);
-        state.user = payload;
+        state.user = payload.user;
       }
     );
   },
