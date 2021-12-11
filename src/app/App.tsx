@@ -23,12 +23,12 @@ const App: React.FC = () => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const [getCurrentUser] = useGetCurrentUserMutation();
 
-  useEffect(() => {
-    console.log('useEffect');
-    if (isAuthenticated) {
-      getCurrentUser();
-    }
-  }, [isAuthenticated, getCurrentUser]);
+  // useEffect(() => {
+  //   console.log('useEffect');
+  //   if (isAuthenticated) {
+  //     getCurrentUser();
+  //   }
+  // }, [isAuthenticated, getCurrentUser]);
 
   return (
     <Routes>

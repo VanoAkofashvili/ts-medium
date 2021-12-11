@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+// import autoLoginMiddleware from '../common/middleware/auto-login';
 import { apiSlice } from '../features/api';
 import { authReducer } from '../features/auth';
 
