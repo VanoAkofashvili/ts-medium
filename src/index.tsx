@@ -7,7 +7,7 @@ import App from './app/App';
 import { store } from './app/store';
 import theme from './app/theme';
 
-import { loggedIn } from './features/auth';
+import { autoLogin, loggedIn } from './features/auth';
 
 import { ACCESS_TOKEN } from './app/constants';
 
@@ -17,7 +17,9 @@ const rootElement = document.getElementById('root');
 
 // Check for token and update app state if required
 if (localStorage.getItem(ACCESS_TOKEN)) {
-  store.dispatch(loggedIn(localStorage.getItem(ACCESS_TOKEN)));
+  console.log('index.ts');
+  // Set token and isAuthenticated
+  store.dispatch(autoLogin(localStorage.getItem(ACCESS_TOKEN)));
 }
 
 ReactDOM.render(
