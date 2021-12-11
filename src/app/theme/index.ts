@@ -1,9 +1,10 @@
-import { extendTheme, theme as base } from '@chakra-ui/react';
+import { extendTheme, theme as base, Spinner } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import {
   ButtonStyles as Button,
   ContainerStyles as Container,
   DividerStyles as Divider,
+  SpinnerStyles,
 } from './components';
 
 const breakpoints = createBreakpoints({
@@ -32,6 +33,7 @@ const theme = extendTheme({
     Button,
     Container,
     Divider,
+    Spinner: SpinnerStyles,
   },
   styles: {
     global: {
@@ -43,5 +45,7 @@ const theme = extendTheme({
 
   breakpoints,
 });
+
+Spinner.defaultProps = { ...Spinner.defaultProps, thickness: '5px' };
 
 export default theme;
