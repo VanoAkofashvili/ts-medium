@@ -5,13 +5,7 @@ import { Button } from '@chakra-ui/button';
 
 const Navbar = () => {
   return (
-    <Flex
-      direction="row"
-      justify="space-between"
-      alignItems="center"
-      pr={4}
-      bg="gray.100"
-    >
+    <Flex direction="row" justify="space-between" alignItems="center" pr={4} bg="gray.100">
       <Link to="/auth">
         <Logo boxSize={20} objectFit="contain" />
       </Link>

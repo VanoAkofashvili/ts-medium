@@ -37,27 +37,25 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithReauth: BaseQueryFn<
-  string | FetchArgs,
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs,
   unknown,
-  FetchBaseQueryError
-> = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
-  if (result.error && result.error.status === 401) {
-    console.error({ TOKEN: 'invalid token' });
-    // const refreshResult = await baseQuery('token/refresh/', api, extraOptions);
+  FetchBaseQueryError> = async (args, api, extraOptions) => {
+    let result = await baseQuery(args, api, extraOptions);
+    if (result.error && result.error.status === 401) {
+      console.error({ TOKEN: 'invalid token' });
+      // const refreshResult = await baseQuery('token/refresh/', api, extraOptions);
 
-    // if (refreshResult.data) {
-    //   api.dispatch(tokenUpdated({ accessToken: refreshResult.data as string }));
+      // if (refreshResult.data) {
+      //   api.dispatch(tokenUpdated({ accessToken: refreshResult.data as string }));
 
-    //   // retry the initial query
-    //   result = await baseQuery(args, api, extraOptions);
-    // } else {
-    //   api.dispatch(logout());
-    // }
-  }
-  return result;
-};
+      //   // retry the initial query
+      //   result = await baseQuery(args, api, extraOptions);
+      // } else {
+      //   api.dispatch(logout());
+      // }
+    }
+    return result;
+  };
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -75,7 +73,7 @@ export const apiSlice = createApi({
         if (getCacheEntry().data) {
           localStorage.setItem(
             ACCESS_TOKEN,
-            getCacheEntry().data?.token as string
+            getCacheEntry().data?.token as string,
           );
         }
       },
