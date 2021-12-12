@@ -39,6 +39,7 @@ const authSlice = createSlice({
 });
 
 // Selectors
+export const selectIsAuthenticated = (state: RootState) => state.auth.user || state.auth.token;
 
 export const selectCurrentUser = (state: RootState) => state.auth.user;
 

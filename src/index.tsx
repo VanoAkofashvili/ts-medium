@@ -15,9 +15,9 @@ import './app/theme/styles.css';
 
 const rootElement = document.getElementById('root');
 
-// Check for token and update app state if required
+// Check for token and update app state
 if (localStorage.getItem(ACCESS_TOKEN)) {
-  // Set token and isAuthenticated
+  console.log('index.js');
   store.dispatch(autoLogin(localStorage.getItem(ACCESS_TOKEN) as string));
 }
 

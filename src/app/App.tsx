@@ -7,38 +7,39 @@ import { PostsList } from '../features/posts';
 import { RoutePaths as _ } from './constants';
 
 const Main = () => {
-    const { data: posts } = useGetPostsAllQuery();
-    return (
-        <main>
-            <pre>{JSON.stringify(posts, null, 2)}</pre>
-        </main>
-    );
+  const { data: posts } = useGetPostsAllQuery();
+  return (
+    <main>
+      <pre>{JSON.stringify(posts, null, 2)}</pre>
+    </main>
+  );
 };
+
 const App: React.FC = () => {
-    return (
-        <Routes>
-            <Route path={_.home} element={<Layout />}>
-                <Route
-                    index
-                    element={
-                        <PrivateRoute>
-                            <Main />
-                        </PrivateRoute>
-                    }
-                />
-                <Route path={_.login} element={<Login />} />
-                <Route path={_.register} element={<Register />} />
-                <Route
-                    path={_.protected}
-                    element={
-                        <PrivateRoute>
-                            <PostsList />
-                        </PrivateRoute>
-                    }
-                />
-            </Route>
-        </Routes>
-    );
+  return (
+    <Routes>
+      <Route path={_.home} element={<Layout />}>
+        <Route
+          index
+          element={
+            <PrivateRoute>
+              <Main />
+            </PrivateRoute>
+          }
+        />
+        <Route path={_.login} element={<Login />} />
+        <Route path={_.register} element={<Register />} />
+        <Route
+          path={_.protected}
+          element={
+            <PrivateRoute>
+              <PostsList />
+            </PrivateRoute>
+          }
+        />
+      </Route>
+    </Routes>
+  );
 };
 
 export default App;
