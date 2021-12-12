@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useAppSelector } from './use-store';
-import { selectCurrentUser } from '../../features/auth';
+import { selectIsAuthenticated } from '../../features/auth';
 
 export const useAuth = () => {
-  const user = useAppSelector(selectCurrentUser);
+  const user = useAppSelector(selectIsAuthenticated);
 
   return useMemo(() => ({ user }), [user]);
 };

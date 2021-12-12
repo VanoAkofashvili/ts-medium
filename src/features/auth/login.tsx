@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Container, Box, Text, Divider } from '@chakra-ui/react';
 import * as Yup from 'yup';
@@ -29,16 +30,17 @@ const Login: React.FC = withNoAuth(() => {
     },
   };
 
-  const loginValidationSchema: Yup.SchemaOf<typeof formValues.initialValues> =
-    Yup.object({
-      email: Yup.string().email('Invalid email address').required('Required'),
-      password: Yup.string().required('Required'),
-    });
+  const loginValidationSchema: Yup.SchemaOf<typeof formValues.initialValues> = Yup.object({
+    email: Yup.string().email('Invalid email address').required('Required'),
+    password: Yup.string().required('Required'),
+  });
 
   const handleSubmit = async (values: LoginFormFields) => {
     try {
       await login(values).unwrap();
-      navigate('/', { replace: true });
+      navigate('/', {
+        replace: true,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -47,10 +49,18 @@ const Login: React.FC = withNoAuth(() => {
   return (
     <Box
       flexGrow="1"
-      p={{ base: 2, sm: 4 }}
+      p={{
+        base: 2,
+        sm: 4,
+      }}
       d="flex"
-      flexDirection={{ base: 'column', md: 'row' }}
-      justifyContent={{ md: 'space-between' }}
+      flexDirection={{
+        base: 'column',
+        md: 'row',
+      }}
+      justifyContent={{
+        md: 'space-between',
+      }}
       alignItems="center"
     >
       <LoginHeader />
@@ -62,7 +72,7 @@ const Login: React.FC = withNoAuth(() => {
         >
           {({ isSubmitting }) => (
             <Form>
-              {Object.keys(formValues.initialValues).map((input) => {
+              {Object.keys(formValues.initialValues).map(input => {
                 return (
                   <TextControl
                     key={input}
@@ -72,24 +82,14 @@ const Login: React.FC = withNoAuth(() => {
                   />
                 );
               })}
-              <Button
-                type="submit"
-                isLoading={isLoading}
-                variant="primary"
-                isFullWidth
-              >
+              <Button type="submit" isLoading={isLoading} variant="primary" isFullWidth>
                 Log In
               </Button>
             </Form>
           )}
         </Formik>
         <Link to="/login">
-          <Text
-            mt={4}
-            color="facebook.blue"
-            fontWeight="light"
-            textColor="facebook.primary"
-          >
+          <Text mt={4} color="facebook.blue" fontWeight="light" textColor="facebook.primary">
             Forgot password?
           </Text>
         </Link>
