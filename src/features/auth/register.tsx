@@ -3,6 +3,7 @@ import { Form, Formik } from 'formik';
 import { TextControl, capitalize } from '../../common';
 import { Button } from '@chakra-ui/button';
 import { FormFields } from '../../app/types';
+import { withNoAuth } from '../../common/hocs';
 
 interface RegisterFormFields {
   username: string;
@@ -10,7 +11,7 @@ interface RegisterFormFields {
   password: string;
 }
 
-const Register: React.FC = () => {
+const Register: React.FC = withNoAuth(() => {
   const formValues: FormFields<RegisterFormFields> = {
     initialValues: {
       email: '',
@@ -58,6 +59,6 @@ const Register: React.FC = () => {
       )}
     </Formik>
   );
-};
+});
 
 export { Register };

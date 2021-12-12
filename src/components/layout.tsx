@@ -11,7 +11,7 @@ export const Layout: React.FC = () => {
   }
 
   return (
-    <Container p={0}>
+    <Container p={0} maxW="container.lg">
       <Outlet />
     </Container>
   );

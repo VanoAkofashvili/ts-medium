@@ -18,8 +18,8 @@ export interface LoginResponse {
 }
 
 export interface Post {
+  _id: string;
   likes: string[];
-  _id?: string;
   userId: string;
   desc: string;
   img: string;
