@@ -1,11 +1,5 @@
 import { useField } from 'formik';
-import {
-  Input,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  InputProps,
-} from '@chakra-ui/react';
+import { Input, FormControl, FormLabel, FormErrorMessage, InputProps } from '@chakra-ui/react';
 
 interface TextControlProps {
   label: string;
@@ -29,11 +23,7 @@ export const TextControl: React.FC<TextControlProps & InputProps> = ({
   return (
     <FormControl id={label} isInvalid={!!(meta.touched && meta.error)} mb={5}>
       {withLabel && <FormLabel htmlFor={label}>{label}</FormLabel>}
-      <Input
-        {...field}
-        {...props}
-        {...(withLabel ? {} : { placeholder: label })}
-      />
+      <Input {...field} {...props} {...(withLabel ? {} : { placeholder: label })} />
       <FormErrorMessage>{meta.error}</FormErrorMessage>
     </FormControl>
   );

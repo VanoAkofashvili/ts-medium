@@ -7,7 +7,7 @@ import App from './app/App';
 import { store } from './app/store';
 import theme from './app/theme';
 
-import { autoLogin, loggedIn } from './features/auth';
+import { autoLogin } from './features/auth';
 
 import { ACCESS_TOKEN } from './app/constants';
 
@@ -17,9 +17,12 @@ const rootElement = document.getElementById('root');
 
 // Check for token and update app state if required
 if (localStorage.getItem(ACCESS_TOKEN)) {
-  console.log('index.ts');
   // Set token and isAuthenticated
-  store.dispatch(autoLogin(localStorage.getItem(ACCESS_TOKEN)));
+  store.dispatch(autoLogin(localStorage.getItem(ACCESS_TOKEN) as string));
+}
+
+if (process.env.NODE_ENV === 'development') {
+  window.store = store;
 }
 
 ReactDOM.render(
@@ -30,5 +33,5 @@ ReactDOM.render(
       </BrowserRouter>
     </ChakraProvider>
   </Provider>,
-  rootElement
+  rootElement,
 );

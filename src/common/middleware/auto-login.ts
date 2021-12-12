@@ -14,4 +14,4 @@
 //   };
 
 // export default autoLoginMiddleware;
-export {};
+export { };

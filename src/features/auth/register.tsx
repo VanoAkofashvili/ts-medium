@@ -1,8 +1,7 @@
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
-import { TextControl } from '../../common/components';
+import { TextControl, capitalize } from '../../common';
 import { Button } from '@chakra-ui/button';
-import { capitalize } from '../../common/utils';
 import { FormFields } from '../../app/types';
 
 interface RegisterFormFields {
@@ -25,12 +24,8 @@ const Register: React.FC = () => {
     },
   };
 
-  const registerValidationSchema: Yup.SchemaOf<
-    typeof formValues.initialValues
-  > = Yup.object({
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required'),
+  const registerValidationSchema: Yup.SchemaOf<typeof formValues.initialValues> = Yup.object({
+    email: Yup.string().email('Invalid email address').required('Email is required'),
     username: Yup.string().required('Required'),
     password: Yup.string().required('Required'),
   });
@@ -46,7 +41,7 @@ const Register: React.FC = () => {
     >
       {({ isSubmitting }) => (
         <Form>
-          {Object.keys(formValues.initialValues).map((input) => {
+          {Object.keys(formValues.initialValues).map(input => {
             return (
               <TextControl
                 key={input}
